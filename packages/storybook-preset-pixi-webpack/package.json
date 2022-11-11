@@ -1,0 +1,78 @@
+{
+  "name": "storybook-preset-pixi-webpack",
+  "version": "0.0.0",
+  "description": "Storybook for PixiJS: View PixiJS Components in isolation with Hot Reloading.",
+  "keywords": [
+    "storybook"
+  ],
+  "homepage": "https://github.com/storybookjs/storybook/tree/main/presets/html-webpack",
+  "bugs": {
+    "url": "https://github.com/storybookjs/storybook/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/storybookjs/storybook.git",
+    "directory": "presets/html-webpack"
+  },
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/storybook"
+  },
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./preset": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./package.json": {
+      "require": "./package.json",
+      "import": "./package.json",
+      "types": "./package.json"
+    }
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "*.js",
+    "*.d.ts"
+  ],
+  "scripts": {
+    "check": "tsc --noEmit",
+    "build": "../../scripts/prepare/bundle.ts"
+  },
+  "dependencies": {
+    "@storybook/core-webpack": "7.0.0-alpha.48",
+    "@types/node": "^16.0.0",
+    "react": "16.14.0",
+    "react-dom": "16.14.0",
+    "webpack": "5"
+  },
+  "devDependencies": {
+    "typescript": "~4.6.3"
+  },
+  "peerDependencies": {
+    "@babel/core": "*"
+  },
+  "engines": {
+    "node": ">=10.13.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "bundler": {
+    "entries": [
+      "./src/index.ts"
+    ],
+    "platform": "node"
+  },
+  "gitHead": "b58a29b785462f8a8b711b6bb2d7223fd6dc17fd"
+}
