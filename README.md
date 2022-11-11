@@ -31,6 +31,7 @@ Replace `.storybook/main.js` with the below, setting up the correct paths as nec
 
 ```javascript
 module.exports = {
+  // use glob matching, eg: ../src/stories/**/*.stories.@(ts|tsx|js|jsx|mdx)
   stories: ['RELATIVE_PATH_TO_STORIES'],
   staticDirs: ['RELATIVE_PATH_TO_ASSETS'],
   logLevel: 'debug',
@@ -109,6 +110,8 @@ type StoryFnPixiReturnType = {
 
 If your component already matches this particular interface, then you can just return an
 instance of it.
+
+You can see an [example story here](https://github.com/pixijs/pixi-storybook/tree/main/packages/example)
 
 ## Decorators
 
