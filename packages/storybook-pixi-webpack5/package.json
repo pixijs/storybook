@@ -2,11 +2,11 @@
   "name": "storybook-pixi-webpack5",
   "version": "0.0.0",
   "description": "Storybook for PixiJS: View Pixi Components in isolation with Hot Reloading.",
-  "homepage": "https://github.com/storybookjs/storybook/tree/main/frameworks/pixi-webpack5",
+  "homepage": "https://github.com/pixijs/pixi-storybook/tree/main/packages/storybook-pixi-webpack5",
   "repository": {
     "type": "git",
-    "url": "https://github.com/storybookjs/storybook.git",
-    "directory": "frameworks/pixi-webpack5"
+    "url": "https://github.com/pixijs/pixi-storybook.git",
+    "directory": "packages/storybook-pixi-webpack5"
   },
   "license": "MIT",
   "exports": {
