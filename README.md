@@ -20,7 +20,71 @@ cd my-app
 npx storybook@7.0.0-alpha.48 init -t html
 ```
 
-For more information visit: [storybook.js.org](https://storybook.js.org)
+Remove HTML framework/renderer and install PixiJS framework/renderer:
+
+```sh
+npm remove @storybook/html @storybook/html-webpack5 --save-dev
+npm install storybook-pixi storybook-pixi-webpack5 --save-dev
+```
+
+Replace `.storybook/main.js` with the below, setting up the correct paths as necessary.
+
+```javascript
+module.exports = {
+  stories: ['RELATIVE_PATH_TO_STORIES'],
+  staticDirs: ['RELATIVE_PATH_TO_ASSETS'],
+  logLevel: 'debug',
+  addons: [
+    '@storybook/addon-actions',
+    '@storybook/addon-backgrounds',
+    '@storybook/addon-controls',
+    '@storybook/addon-viewport',
+    '@storybook/addon-links',
+    '@storybook/addon-highlight',
+  ],
+  core: {
+    channelOptions: { allowFunction: false, maxDepth: 10 },
+    disableTelemetry: true,
+  },
+  features: {
+    buildStoriesJson: true,
+    breakingChangesV7: true,
+  },
+  framework: 'storybook-pixi-webpack5',
+};
+```
+
+Replace `.storybook/preview.js` with:
+
+```javascript
+export const parameters = { 
+  layout: 'fullscreen', 
+  pixi: {
+    // these are passed as options to `PIXI.Application` when instantiated by the 
+    // renderer
+    applicationOptions: {
+      backgroundColor: 0x1099bb,
+      resolution: 1,
+    },
+    // optional, if you want to provide custom resize logic, pass a function here,
+    // if nothing is provided, the default resize function is used, which looks like
+    // this, where w and h will be the width and height of the storybook canvas.
+    resizeFn: (w, h) => {
+      return {
+        rendererWidth: w,
+        rendererHeight: h,
+        canvasWidth: w,
+        canvasHeight: h,
+      };
+    },
+  },
+};
+```
+
+Depending on where you want to keep your story source, either delete `src/stories` folder
+if you plan to keep your stories co-located with their components, or empty `src/stories`
+of the example HTML stories and replace with your own. See below for instructions on
+how to write PixiJS Stories in the correct format.
 
 ## PixiJS Stories
 
