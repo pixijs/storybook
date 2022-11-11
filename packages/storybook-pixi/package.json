@@ -2,21 +2,11 @@
   "name": "storybook-pixi",
   "version": "0.0.0",
   "description": "Storybook PixiJS renderer",
-  "keywords": [
-    "storybook"
-  ],
   "homepage": "https://github.com/storybookjs/storybook/tree/main/renderers/pixi",
-  "bugs": {
-    "url": "https://github.com/storybookjs/storybook/issues"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/storybookjs/storybook.git",
     "directory": "renderers/pixi"
-  },
-  "funding": {
-    "type": "opencollective",
-    "url": "https://opencollective.com/storybook"
   },
   "license": "MIT",
   "exports": {
