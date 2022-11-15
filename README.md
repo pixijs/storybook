@@ -30,7 +30,7 @@ Remove HTML framework/renderer and install PixiJS framework/renderer:
 
 ```sh
 npm remove @storybook/html @storybook/html-webpack5 --save-dev
-npm install storybook-pixi storybook-pixi-webpack5 --save-dev
+npm install @pixi/storybook-renderer @pixi/storybook-webpack5 --save-dev
 ```
 
 Replace `.storybook/main.js` with the below, setting up the correct paths as necessary.
