@@ -1,14 +1,14 @@
 import type {
   StorybookConfig as StorybookConfigBase,
   TypescriptOptions as TypescriptOptionsReact,
-} from 'storybook-preset-pixi-webpack';
+} from '@pixi/storybook-preset-webpack';
 import type {
   StorybookConfigWebpack,
   BuilderOptions,
   TypescriptOptions as TypescriptOptionsBuilder,
 } from '@storybook/builder-webpack5';
 
-type FrameworkName = '@storybook/pixi-webpack5';
+type FrameworkName = '@pixi/storybook-webpack5';
 type BuilderName = '@storybook/builder-webpack5';
 
 export type FrameworkOptions = {

@@ -1,4 +1,4 @@
 /// <reference types="offscreencanvas" />
 
-export * from 'storybook-pixi';
+export * from '@pixi/storybook-renderer';
 export * from './types';

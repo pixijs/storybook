@@ -1,12 +1,12 @@
 {
-  "name": "storybook-pixi",
+  "name": "@pixi/storybook-preset-webpack",
   "version": "0.0.1",
-  "description": "Storybook PixiJS renderer",
-  "homepage": "https://github.com/pixijs/pixi-storybook/tree/main/packages/storybook-pixi",
+  "description": "Storybook for PixiJS: View PixiJS Components in isolation with Hot Reloading.",
+  "homepage": "https://github.com/pixijs/storybook/tree/main/packages/storybook-preset-webpack",
   "repository": {
     "type": "git",
-    "url": "https://github.com/pixijs/pixi-storybook.git",
-    "directory": "packages/storybook-pixi"
+    "url": "https://github.com/pixijs/storybook.git",
+    "directory": "packages/storybook-preset-webpack"
   },
   "license": "MIT",
   "exports": {
@@ -15,10 +15,10 @@
       "import": "./dist/index.mjs",
       "types": "./dist/index.d.ts"
     },
-    "./preview": {
-      "require": "./dist/config.js",
-      "import": "./dist/config.mjs",
-      "types": "./dist/config.d.ts"
+    "./preset": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
     },
     "./package.json": {
       "require": "./package.json",
@@ -40,21 +40,13 @@
     "build": "../../scripts/prepare/bundle.ts"
   },
   "dependencies": {
-    "@storybook/addons": "7.0.0-alpha.48",
-    "@storybook/core-client": "7.0.0-alpha.48",
-    "@storybook/csf": "0.0.2--canary.0899bb7.0",
-    "@storybook/docs-tools": "7.0.0-alpha.48",
-    "@storybook/preview-web": "7.0.0-alpha.48",
-    "@storybook/store": "7.0.0-alpha.48",
-    "deep-equal": "^2.0.5",
-    "global": "^4.4.0",
-    "pixi.js": "^6.5.2",
+    "@storybook/core-webpack": "7.0.0-alpha.48",
+    "@types/node": "^16.0.0",
     "react": "16.14.0",
     "react-dom": "16.14.0",
-    "ts-dedent": "^2.0.0"
+    "webpack": "5"
   },
   "devDependencies": {
-    "@types/deep-equal": "^1.0.1",
     "typescript": "~4.6.3"
   },
   "peerDependencies": {
@@ -68,9 +60,8 @@
   },
   "bundler": {
     "entries": [
-      "./src/index.ts",
-      "./src/config.ts"
+      "./src/index.ts"
     ],
-    "platform": "browser"
+    "platform": "node"
   }
 }

@@ -2,6 +2,12 @@
 
 ---
 
+**Please note, this library currently works against [`storybook@7.0.0-alpha.48`](https://github.com/storybookjs/storybook/tree/v7.0.0-alpha.48). 
+Because v7 is still in alpha, it appears that the API is very much in flux. We will ensure 
+API compatibility once v7 is more stable, hopefully once beta lands.**
+
+---
+
 Storybook for PixiJS is a UI development environment for your PixiJS Components.
 With it, you can visualize different states of your Components and develop them interactively.
 
