@@ -57,7 +57,7 @@ module.exports = {
     buildStoriesJson: true,
     breakingChangesV7: true,
   },
-  framework: 'storybook-pixi-webpack5',
+  framework: '@pixi/storybook-webpack5',
 };
 ```
 
