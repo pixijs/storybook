@@ -40,7 +40,7 @@
     "build": "../../scripts/prepare/bundle.ts"
   },
   "dependencies": {
-    "@storybook/core-webpack": "7.0.0-alpha.48",
+    "@storybook/core-webpack": "~7.0.0-beta",
     "@types/node": "^16.0.0",
     "react": "16.14.0",
     "react-dom": "16.14.0",
