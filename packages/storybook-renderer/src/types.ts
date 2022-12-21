@@ -1,6 +1,7 @@
 import type { DisplayObject, IApplicationOptions } from 'pixi.js';
 import type { StoryContext as DefaultStoryContext } from '@storybook/csf';
 import type { parameters } from './config';
+import { Renderer } from '@storybook/types';
 
 export type { RenderContext } from '@storybook/types';
 
@@ -46,7 +47,7 @@ export interface ShowErrorArgs {
   description: string;
 }
 
-export type PixiFramework = {
+export interface PixiFramework extends Renderer {
   component: DisplayObject;
   storyResult: StoryFnPixiReturnType;
 };
