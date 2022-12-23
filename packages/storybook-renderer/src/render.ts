@@ -3,7 +3,7 @@ import { Application } from 'pixi.js';
 import equals from 'deep-equal';
 
 import { dedent } from 'ts-dedent';
-import type { Store_RenderContext } from '@storybook/types';
+import type { RenderContext } from '@storybook/types';
 import type {
   PixiFramework,
   StoryFnPixiReturnType,
@@ -174,8 +174,8 @@ export function renderToDOM(
     showMain,
     showError,
     forceRemount,
-  }: Store_RenderContext<PixiFramework>,
-  domElement: Element
+  }: RenderContext<PixiFramework>,
+  domElement: HTMLCanvasElement
 ) {
   const {
     parameters: { pixi },

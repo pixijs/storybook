@@ -1,5 +1,5 @@
 /* eslint-disable prefer-destructuring */
-import type { Addon_ClientStoryApi, Addon_Loadable } from '@storybook/types';
+import type { Addon_ClientStoryApi, Addon_Loadable, Renderer } from '@storybook/types';
 import { start } from '@storybook/core-client';
 import type { PixiFramework } from './types';
 
@@ -13,7 +13,7 @@ interface ClientApi extends Addon_ClientStoryApi<PixiFramework['storyResult']> {
   raw: () => any; // todo add type
 }
 
-const api = start(renderToDOM);
+const api = start<any>(renderToDOM); // todo add type
 
 export const storiesOf: ClientApi['storiesOf'] = (kind, m) => {
   return (api.clientApi.storiesOf(kind, m) as ReturnType<ClientApi['storiesOf']>).addParameters({
