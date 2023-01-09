@@ -1,4 +1,4 @@
-import type { DisplayObject, IApplicationOptions } from 'pixi.js';
+import type { Application, DisplayObject, IApplicationOptions } from 'pixi.js';
 import type { StoryContext as DefaultStoryContext } from '@storybook/csf';
 import type { parameters } from './config';
 import { Renderer } from '@storybook/types';
@@ -27,6 +27,7 @@ export type StoryResizeFn = (w: number, h: number) => void;
 
 export type StoryFnPixiReturnType = {
   view: DisplayObject;
+  startup?: (app: Application) => void;
   update?: (delta: number) => void;
   resize?: StoryResizeFn;
   destroy?: () => void;
