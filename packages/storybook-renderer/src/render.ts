@@ -129,6 +129,11 @@ function addStory({
   resizeFn: ApplicationResizeFunction;
   storyObject: StoryFnPixiReturnType;
 }): EventHandler {
+
+  if(storyObject.startup) {
+    storyObject.startup(app);
+  }
+
   const storyResizeHandler = initResize({
     app,
     resizeFn,
