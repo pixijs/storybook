@@ -167,7 +167,7 @@ function removeStory({
 export function renderToDOM(
   {
     storyContext,
-    storyFn,
+    unboundStoryFn,
     kind,
     id,
     name,
@@ -177,10 +177,9 @@ export function renderToDOM(
   }: RenderContext<PixiFramework>,
   domElement: HTMLCanvasElement
 ) {
-  const {
-    parameters: { pixi },
-  } = storyContext;
-  const { applicationOptions, resizeFn = resizeDefault } = pixi;
+  const { parameters } = storyContext;
+  const { pixi: pixiParameters } = parameters;
+  const { applicationOptions, resizeFn = resizeDefault } = pixiParameters;
 
   // Create a new PIXI.Application instance each time applicationOptions changes, ideally
   // applicationOptions is set globally in pixi parameters in `.storybook/preview.ts`, but
@@ -208,7 +207,16 @@ export function renderToDOM(
     storyState = null;
   }
 
-  const storyObject = storyFn();
+  const storyObject = unboundStoryFn({
+    ...storyContext,
+    parameters: {
+      ...parameters,
+      pixi: {
+        ...pixiParameters,
+        app,
+      }
+    }
+  });
   showMain();
 
   if (!storyObject.view) {
