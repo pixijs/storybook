@@ -187,6 +187,9 @@ export function renderToDOM(
   // TODO: recreate PIXI.Application if forceRemount is true?
   const app = getPixiApplication(applicationOptions);
 
+  // Expose app to a global variable for debugging using `pixi-inspector` (https://github.com/bfanger/pixi-inspector)
+  (globalThis as any).__PIXI_APP__ = app;
+
   if (domElement.firstChild !== app.view || forceRemount) {
     // eslint-disable-next-line no-param-reassign
     domElement.innerHTML = '';
