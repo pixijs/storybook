@@ -5,7 +5,9 @@
     "packages/*"
   ],
   "scripts": {
-    "prepublish": "lerna run build",
+    "build": "nx run-many --target=build --all --parallel",
+    "build:force": "npm run build -- --skip-nx-cache",
+    "prepublish": "npm run build:force",
     "check": "lerna run check",
     "publish": "lerna publish --no-private"
   },

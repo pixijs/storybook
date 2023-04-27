@@ -40,12 +40,12 @@
     "build": "../../scripts/prepare/bundle.ts"
   },
   "dependencies": {
-    "@storybook/addons": "~7.0.0-beta",
-    "@storybook/core-client": "~7.0.0-beta",
-    "@storybook/csf": "0.0.2--canary.0899bb7.0",
-    "@storybook/docs-tools": "~7.0.0-beta",
-    "@storybook/preview-web": "~7.0.0-beta",
-    "@storybook/store": "~7.0.0-beta",
+    "@storybook/addons": "^7.0.0",
+    "@storybook/core-client": "^7.0.0",
+    "@storybook/csf": "~0.1.0",
+    "@storybook/docs-tools": "^7.0.0",
+    "@storybook/preview-web": "^7.0.0",
+    "@storybook/store": "^7.0.0",
     "deep-equal": "^2.0.5",
     "global": "^4.4.0",
     "react": "16.14.0",
