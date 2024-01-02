@@ -14,7 +14,12 @@
     "esModuleInterop": true,
     "isolatedModules": true,
     "strictBindCallApply": true,
-    "lib": ["dom", "esnext"]
+    "lib": ["dom", "esnext"],
+    "paths": {
+      "@pixi/storybook-renderer": ["packages/storybook-renderer/src"],
+      "@pixi/storybook-preset-webpack": ["packages/storybook-preset-webpack/src"],
+      "@pixi/storybook-webpack5": ["packages/storybook-webpack5/src"],
+    }
   },
   "exclude": ["dist", "**/dist", "node_modules", "**/node_modules", "**/setup-jest.ts"],
   "ts-node": {

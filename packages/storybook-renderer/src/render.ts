@@ -1,5 +1,5 @@
-import type { IApplicationOptions } from 'pixi.js';
-import { Application } from 'pixi.js';
+import type { ApplicationOptions } from 'pixi.js';
+import { Application, Ticker } from 'pixi.js';
 import equals from 'deep-equal';
 
 import { dedent } from 'ts-dedent';
@@ -13,7 +13,10 @@ import type {
 } from './types';
 
 let pixiApp: Application;
-let lastApplicationOptions: IApplicationOptions;
+let canvas = document.createElement('canvas');
+canvas.style.display = 'block';
+let appReady: Promise<void>;
+let lastApplicationOptions: ApplicationOptions;
 let storyState: {
   resizeHandler: EventHandler;
   storyObject: StoryFnPixiReturnType;
@@ -29,20 +32,20 @@ function resizeDefault(w: number, h: number): ApplicationResizeFunctionReturnTyp
   return { rendererWidth: w, rendererHeight: h, canvasWidth: w, canvasHeight: h };
 }
 
-function getPixiApplication(applicationOptions: IApplicationOptions): Application {
+function getPixiApplication(applicationOptions: ApplicationOptions): Application {
   // Destroy previous app instance and create a new one each time applicationOptions
   // changes - in theory it shouldn't be often
   if (!equals(applicationOptions, lastApplicationOptions)) {
     if (pixiApp) {
-      pixiApp.destroy(true, {
+      pixiApp.destroy({
         children: true,
         texture: true,
-        baseTexture: true,
+        textureSource: true,
       });
     }
 
-    pixiApp = new Application(applicationOptions);
-    pixiApp.view.style.display = 'block';
+    pixiApp = new Application();
+    appReady = pixiApp.init({...applicationOptions, canvas});
 
     lastApplicationOptions = applicationOptions;
   }
@@ -65,7 +68,7 @@ function resizeApplication({
   storyObject?: StoryFnPixiReturnType;
   force?: boolean;
 }) {
-  const { view, renderer } = app;
+  const { renderer } = app;
   const newSize = resizeFn(containerWidth, containerHeight);
   if (
     force ||
@@ -78,9 +81,10 @@ function resizeApplication({
     resizeState.h = newSize.rendererHeight;
     resizeState.canvasWidth = newSize.canvasWidth;
     resizeState.canvasHeight = newSize.canvasHeight;
-    view.style.width = `${newSize.canvasWidth}px`;
-    view.style.height = `${newSize.canvasHeight}px`;
+    canvas.style.width = `${newSize.canvasWidth}px`;
+    canvas.style.height = `${newSize.canvasHeight}px`;
     window.scrollTo(0, 0);
+    if(renderer)
     renderer.resize(resizeState.w, resizeState.h);
     storyObject?.resize?.(resizeState.w, resizeState.h);
   }
@@ -138,7 +142,7 @@ function addStory({
   app.stage.addChild(storyObject.view);
 
   if (storyObject.update) {
-    app.ticker.add(storyObject.update, storyObject);
+    Ticker.shared.add(storyObject.update, storyObject);
   }
 
   return storyResizeHandler;
@@ -154,7 +158,7 @@ function removeStory({
   storyResizeHandler: EventHandler;
 }) {
   if (storyObject.update) {
-    app.ticker.remove(storyObject.update, storyObject);
+    Ticker.shared.remove(storyObject.update, storyObject);
   }
 
   app.stage.removeChild(storyObject.view);
@@ -190,10 +194,10 @@ export function renderToDOM(
   // Expose app to a global variable for debugging using `pixi-inspector` (https://github.com/bfanger/pixi-inspector)
   (globalThis as any).__PIXI_APP__ = app;
 
-  if (domElement.firstChild !== app.view || forceRemount) {
+  if (domElement.firstChild !== canvas || forceRemount) {
     // eslint-disable-next-line no-param-reassign
     domElement.innerHTML = '';
-    domElement.appendChild(app.view);
+    domElement.appendChild(canvas);
   }
 
   if (storyState) {
@@ -217,6 +221,7 @@ export function renderToDOM(
       pixi: {
         ...pixiParameters,
         app,
+        appReady
       }
     }
   });

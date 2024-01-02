@@ -42,16 +42,14 @@
   "dependencies": {
     "@pixi/storybook-preset-webpack": "^0.0.6",
     "@pixi/storybook-renderer": "^0.0.6",
-    "@storybook/builder-webpack5": "^7.0.0",
-    "@storybook/core-common": "^7.0.0",
+    "@storybook/builder-webpack5": "^7.6.6",
+    "@storybook/core-common": "^7.6.6",
     "@types/node": "^14.14.20 || ^16.0.0",
-    "@types/offscreencanvas": "^2019.7.0",
-    "global": "^4.4.0",
-    "react": "16.14.0",
-    "react-dom": "16.14.0"
+    "@types/offscreencanvas": "^2019.7.3",
+    "global": "^4.4.0"
   },
   "devDependencies": {
-    "typescript": "~4.6.3"
+    "typescript": "~5.3.3"
   },
   "peerDependencies": {
     "@babel/core": "*"

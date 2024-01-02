@@ -1,7 +1,7 @@
-import type { DisplayObject, IApplicationOptions } from 'pixi.js';
 import type { StoryContext as DefaultStoryContext } from '@storybook/csf';
 import type { parameters } from './config';
 import { Renderer } from '@storybook/types';
+import { ApplicationOptions, Container, Ticker } from 'pixi.js';
 
 export type { RenderContext } from '@storybook/types';
 
@@ -17,7 +17,7 @@ export type ApplicationResizeFunction = (
 ) => ApplicationResizeFunctionReturnType;
 
 export type PixiRendererParameters = {
-  applicationOptions: IApplicationOptions;
+  applicationOptions: ApplicationOptions;
   resizeFn: ApplicationResizeFunction;
 };
 
@@ -26,8 +26,8 @@ export type EventHandler = (e: Event) => void;
 export type StoryResizeFn = (w: number, h: number) => void;
 
 export type StoryFnPixiReturnType = {
-  view: DisplayObject;
-  update?: (delta: number) => void;
+  view: Container;
+  update?: (ticker: Ticker) => void;
   resize?: StoryResizeFn;
   destroy?: () => void;
 };
@@ -48,7 +48,7 @@ export interface ShowErrorArgs {
 }
 
 export interface PixiFramework extends Renderer {
-  component: DisplayObject;
+  component: Container;
   storyResult: StoryFnPixiReturnType;
 };
 

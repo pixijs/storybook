@@ -6,12 +6,12 @@
     "storybook": "storybook dev -p 6006"
   },
   "dependencies": {
-    "@storybook/addon-essentials": "~7.0.0-beta",
-    "@storybook/addon-interactions": "~7.0.0-beta",
-    "@storybook/addon-links": "~7.0.0-beta",
+    "@storybook/addon-essentials": "^7.6.6",
+    "@storybook/addon-interactions": "^7.6.6",
+    "@storybook/addon-links": "^7.6.6",
     "@pixi/storybook-renderer": "*",
     "@pixi/storybook-webpack5": "*",
-    "pixi.js": "^6.3.0",
-    "storybook": "~7.0.0-beta"
+    "pixi.js": "^8.0.0-rc",
+    "storybook": "^7.6.6"
   }
 }
