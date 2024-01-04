@@ -46,6 +46,15 @@ function getPixiApplication(applicationOptions: ApplicationOptions): Application
 
     pixiApp = new Application();
     appReady = pixiApp.init({...applicationOptions, canvas});
+    appReady.then(() => {
+      resizeApplication({
+        containerWidth: window.innerWidth,
+        containerHeight: window.innerHeight,
+        app: pixiApp,
+        resizeFn: resizeDefault,
+        force: true,
+      });
+    });
 
     lastApplicationOptions = applicationOptions;
   }
