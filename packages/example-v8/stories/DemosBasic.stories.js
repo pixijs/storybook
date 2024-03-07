@@ -14,7 +14,5 @@ export default {
 };
 
 export const Default = (args, ctx) => {
-    console.log(ctx.parameters.pixi.app);
-    debugger
-    return new BunnyDemo(args);
+    return new BunnyDemo(args, ctx.parameters.pixi.appReady)
 }

@@ -1,15 +1,13 @@
-import { Assets, Container, Sprite, Texture } from "pixi.js";
-import 'pixi.js/assets'
+import { Assets, Container, Sprite } from "pixi.js";
 
 export class BunnyDemo {
-  constructor({ bunnySize, bunnySpacing, someInjectedObject }) {
+  constructor({ bunnySize, bunnySpacing, someInjectedObject }, appReady) {
     this.view = new Container();
 
-    //async iife
-    (async () => {
+    appReady.then(async () => {
       const tex = await Assets.load("bunny.png");
       const numBunnies = bunnySize * bunnySize;
-
+  
       for (let i = 0; i < numBunnies; i += 1) {
         const bunny = new Sprite(tex);
         bunny.buttonMode = true;
@@ -19,11 +17,11 @@ export class BunnyDemo {
         bunny.y = Math.floor(i / bunnySize) * bunnySpacing;
         this.view.addChild(bunny);
       }
-
+  
       // Center bunny sprite in local container coordinates
       this.view.pivot.x = this.view.width / 2;
       this.view.pivot.y = this.view.height / 2;
-    })();
+    });
   }
 
   resize(w, h) {
@@ -36,6 +34,7 @@ export class BunnyDemo {
   }
 
   destroy() {
+    console.log("destroying bunny demo");
     this.view.destroy(true);
   }
 }

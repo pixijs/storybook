@@ -37,15 +37,20 @@ function getPixiApplication(applicationOptions: ApplicationOptions): Application
   // changes - in theory it shouldn't be often
   if (!equals(applicationOptions, lastApplicationOptions)) {
     if (pixiApp) {
-      pixiApp.destroy({
-        children: true,
-        texture: true,
-        textureSource: true,
-      });
+      pixiApp.destroy(true);
     }
 
-    pixiApp = new Application();
-    appReady = pixiApp.init({...applicationOptions, canvas});
+    // check if Application has init method
+    if(!Application.prototype.init) {
+      // @ts-expect-error -- v7 options
+      pixiApp = new Application({...applicationOptions, view: canvas});
+      appReady = Promise.resolve();
+    }
+    else {
+      pixiApp = new Application();
+      appReady = pixiApp.init({...applicationOptions, canvas});
+    }
+
     appReady.then(() => {
       resizeApplication({
         containerWidth: window.innerWidth,
