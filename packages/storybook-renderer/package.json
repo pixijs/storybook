@@ -37,7 +37,7 @@
   ],
   "scripts": {
     "check": "tsc --noEmit",
-    "build": "../../scripts/prepare/bundle.ts"
+    "build": "../../scripts/prepare/bundle.ts && tsc"
   },
   "dependencies": {
     "@storybook/addons": "^7.0.0",

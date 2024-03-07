@@ -1,16 +1,16 @@
+import equals from 'deep-equal';
 import type { ApplicationOptions } from 'pixi.js';
 import { Application, Ticker } from 'pixi.js';
-import equals from 'deep-equal';
 
-import { dedent } from 'ts-dedent';
 import type { RenderContext } from '@storybook/types';
+import { dedent } from 'ts-dedent';
 import type {
+  ApplicationResizeFunction,
+  ApplicationResizeFunctionReturnType,
+  EventHandler,
   PixiFramework,
   StoryFnPixiReturnType,
-  ApplicationResizeFunctionReturnType,
-  ApplicationResizeFunction,
-  EventHandler,
-} from './types';
+} from './types/types';
 
 let pixiApp: Application;
 let canvas = document.createElement('canvas');
@@ -28,8 +28,31 @@ const resizeState = {
   canvasHeight: 0,
 };
 
+function updater() {
+  let first = false;
+  return (ticker: Ticker) => {
+    if (first) {
+      resizeApplication({
+        containerWidth: window.innerWidth,
+        containerHeight: window.innerHeight,
+        app: pixiApp,
+        resizeFn: resizeDefault,
+        force: true,
+      });
+    }
+    appReady.then(() => {
+      storyState?.storyObject?.update?.(ticker);
+    });
+  };
+}
+
 function resizeDefault(w: number, h: number): ApplicationResizeFunctionReturnType {
-  return { rendererWidth: w, rendererHeight: h, canvasWidth: w, canvasHeight: h };
+  return {
+    rendererWidth: w,
+    rendererHeight: h,
+    canvasWidth: w,
+    canvasHeight: h,
+  };
 }
 
 function getPixiApplication(applicationOptions: ApplicationOptions): Application {
@@ -41,25 +64,13 @@ function getPixiApplication(applicationOptions: ApplicationOptions): Application
     }
 
     // check if Application has init method
-    if(!Application.prototype.init) {
-      // @ts-expect-error -- v7 options
-      pixiApp = new Application({...applicationOptions, view: canvas});
+    if (!Application.prototype.init) {
+      pixiApp = new Application({ ...applicationOptions, view: canvas });
       appReady = Promise.resolve();
-    }
-    else {
+    } else {
       pixiApp = new Application();
-      appReady = pixiApp.init({...applicationOptions, canvas});
+      appReady = pixiApp.init({ ...applicationOptions, canvas });
     }
-
-    appReady.then(() => {
-      resizeApplication({
-        containerWidth: window.innerWidth,
-        containerHeight: window.innerHeight,
-        app: pixiApp,
-        resizeFn: resizeDefault,
-        force: true,
-      });
-    });
 
     lastApplicationOptions = applicationOptions;
   }
@@ -98,8 +109,7 @@ function resizeApplication({
     canvas.style.width = `${newSize.canvasWidth}px`;
     canvas.style.height = `${newSize.canvasHeight}px`;
     window.scrollTo(0, 0);
-    if(renderer)
-    renderer.resize(resizeState.w, resizeState.h);
+    if (renderer) renderer.resize(resizeState.w, resizeState.h);
     storyObject?.resize?.(resizeState.w, resizeState.h);
   }
 }
@@ -126,18 +136,21 @@ function initResize({
   window.addEventListener('resize', storyResizeHandler);
   // Manually call resize each story render, use force to ensure `storyResizeFn` is called
   // if it exists, since story component will be recreated
-  resizeApplication({
-    containerWidth: window.innerWidth,
-    containerHeight: window.innerHeight,
-    app,
-    resizeFn,
-    storyObject,
-    force: Boolean(storyObject?.resize),
+  appReady.then(() => {
+    resizeApplication({
+      containerWidth: window.innerWidth,
+      containerHeight: window.innerHeight,
+      app,
+      resizeFn,
+      storyObject,
+      force: Boolean(storyObject?.resize),
+    });
   });
 
   return storyResizeHandler;
 }
 
+let updateRef: (ticker: Ticker) => void;
 function addStory({
   app,
   resizeFn,
@@ -156,7 +169,8 @@ function addStory({
   app.stage.addChild(storyObject.view);
 
   if (storyObject.update) {
-    Ticker.shared.add(storyObject.update, storyObject);
+    updateRef = updater();
+    Ticker.shared.add(storyObject.update, updateRef);
   }
 
   return storyResizeHandler;
@@ -172,7 +186,7 @@ function removeStory({
   storyResizeHandler: EventHandler;
 }) {
   if (storyObject.update) {
-    Ticker.shared.remove(storyObject.update, storyObject);
+    Ticker.shared.remove(storyObject.update, updateRef);
   }
 
   app.stage.removeChild(storyObject.view);
@@ -183,17 +197,8 @@ function removeStory({
 }
 
 export function renderToDOM(
-  {
-    storyContext,
-    unboundStoryFn,
-    kind,
-    id,
-    name,
-    showMain,
-    showError,
-    forceRemount,
-  }: RenderContext<PixiFramework>,
-  domElement: HTMLCanvasElement
+  { storyContext, unboundStoryFn, kind, id, name, showMain, showError, forceRemount }: RenderContext<PixiFramework>,
+  domElement: HTMLCanvasElement,
 ) {
   const { parameters } = storyContext;
   const { pixi: pixiParameters } = parameters;
@@ -235,9 +240,9 @@ export function renderToDOM(
       pixi: {
         ...pixiParameters,
         app,
-        appReady
-      }
-    }
+        appReady,
+      },
+    },
   });
   showMain();
 

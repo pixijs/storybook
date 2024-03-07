@@ -1,5 +1,5 @@
 import type { StoryContext as DefaultStoryContext } from '@storybook/csf';
-import type { parameters } from './config';
+import type { parameters } from '../config';
 import { Renderer } from '@storybook/types';
 import { ApplicationOptions, Container, Ticker } from 'pixi.js';
 
