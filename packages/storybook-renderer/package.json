@@ -20,6 +20,11 @@
       "import": "./dist/config.mjs",
       "types": "./dist/config.d.ts"
     },
+    "./helpers": {
+      "require": "./dist/helpers/index.js",
+      "import": "./dist/helpers/index.mjs",
+      "types": "./dist/helpers/index.d.ts"
+    },
     "./package.json": {
       "require": "./package.json",
       "import": "./package.json",
