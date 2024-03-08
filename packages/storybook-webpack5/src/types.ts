@@ -31,16 +31,12 @@ type StorybookConfigFramework = {
           options: BuilderOptions;
         };
   };
-  typescript?: Partial<TypescriptOptionsBuilder & TypescriptOptionsReact> &
-    StorybookConfigBase['typescript'];
+  typescript?: Partial<TypescriptOptionsBuilder & TypescriptOptionsReact> & StorybookConfigBase['typescript'];
 };
 
 /**
  * The interface for Storybook configuration in `main.ts` files.
  */
-export type StorybookConfig = Omit<
-  StorybookConfigBase,
-  keyof StorybookConfigWebpack | keyof StorybookConfigFramework
-> &
+export type StorybookConfig = Omit<StorybookConfigBase, keyof StorybookConfigWebpack | keyof StorybookConfigFramework> &
   StorybookConfigWebpack &
   StorybookConfigFramework;

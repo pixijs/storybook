@@ -6,6 +6,7 @@
     "declaration": true,
     "outDir": "dist",
     "skipLibCheck": true,
+    "skipDefaultLibCheck": true
   },
   "include": ["src/**/*"],
 }

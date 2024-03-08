@@ -16,7 +16,7 @@ type StepOptions = {
 export const exec = async (
   command: string | string[],
   options: Options = {},
-  { startMessage, errorMessage, dryRun, debug, signal }: StepOptions = {}
+  { startMessage, errorMessage, dryRun, debug, signal }: StepOptions = {},
 ): Promise<void> => {
   logger.info();
   if (startMessage) logger.info(startMessage);
