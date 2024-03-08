@@ -42,12 +42,10 @@
   "dependencies": {
     "@storybook/core-webpack": "^7.0.0",
     "@types/node": "^16.0.0",
-    "react": "16.14.0",
-    "react-dom": "16.14.0",
     "webpack": "5"
   },
   "devDependencies": {
-    "typescript": "~4.6.3"
+    "typescript": "~5.3.3"
   },
   "peerDependencies": {
     "@babel/core": "*"

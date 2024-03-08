@@ -1,9 +1,9 @@
 /* eslint-disable prefer-destructuring */
-import type { Addon_ClientStoryApi, Addon_Loadable, Renderer } from '@storybook/types';
+import type { Addon_ClientStoryApi, Addon_Loadable } from '@storybook/types';
 import { start } from '@storybook/core-client';
 import type { PixiFramework } from './types';
 
-import { renderToDOM } from './render';
+import { renderToDOM } from '../render';
 
 const FRAMEWORK = 'pixi';
 

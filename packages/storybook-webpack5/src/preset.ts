@@ -14,7 +14,7 @@ export const core: PresetProperty<'core', StorybookConfig> = async (config, opti
     ...config,
     builder: {
       name: path.dirname(
-        require.resolve(path.join('@storybook/builder-webpack5', 'package.json'))
+        require.resolve(path.join('@storybook/builder-webpack5', 'package.json')),
       ) as '@storybook/builder-webpack5',
       options: typeof framework === 'string' ? {} : framework.options.builder || {},
     },

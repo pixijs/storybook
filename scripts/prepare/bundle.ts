@@ -41,9 +41,7 @@ const run = async ({ cwd, flags }: { cwd: string; flags: string[] }) => {
         const pathName = join(process.cwd(), dir.replace('./src', 'dist'), `${entryName}.d.ts`);
         const srcName = join(process.cwd(), file);
 
-        const rel = relative(dirname(pathName), dirname(srcName))
-          .split(path.sep)
-          .join(path.posix.sep);
+        const rel = relative(dirname(pathName), dirname(srcName)).split(path.sep).join(path.posix.sep);
 
         await fs.ensureFile(pathName);
         await fs.writeFile(
@@ -51,9 +49,9 @@ const run = async ({ cwd, flags }: { cwd: string; flags: string[] }) => {
           dedent`
           // devmode
           export * from '${rel}/${entryName}';
-        `
+        `,
         );
-      })
+      }),
     );
   }
 

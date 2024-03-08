@@ -9,7 +9,8 @@
     "build:force": "npm run build -- --skip-nx-cache",
     "prepublish": "npm run build:force",
     "check": "lerna run check",
-    "publish": "lerna publish --no-private"
+    "publish": "lerna publish --no-private",
+    "storybook": "nx run-many --target=storybook --all --parallel"
   },
   "devDependencies": {
     "lerna": "^6.0.3",
@@ -19,7 +20,7 @@
     "esbuild-plugin-alias": "^0.2.1",
     "ts-dedent": "^2.0.0",
     "ts-node": "^10.4.0",
-    "typescript": "~4.6.3",
+    "typescript": "~5.3.3",
     "slash": "^3.0.0",
     "execa": "^5.0.0",
     "chalk": "^4.1.0"

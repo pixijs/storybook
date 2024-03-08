@@ -2,8 +2,10 @@
 
 import './globals';
 
-export * from './public-api';
-export * from './public-types';
+export * from './types/public-api';
+export * from './types/public-types';
+export * from './types/types';
+export * from './helpers';
 
 // optimization: stop HMR propagation in webpack
 module?.hot?.decline();
