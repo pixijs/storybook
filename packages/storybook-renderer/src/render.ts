@@ -1,6 +1,6 @@
 import equals from 'deep-equal';
-import type { ApplicationOptions } from 'pixi.js';
-import { Application, Ticker } from 'pixi.js';
+import type { IApplicationOptions as ApplicationOptions } from 'pixi.js-legacy';
+import { Application, Ticker } from 'pixi.js-legacy';
 
 import type { RenderContext } from '@storybook/types';
 import { dedent } from 'ts-dedent';
@@ -63,14 +63,8 @@ function getPixiApplication(applicationOptions: ApplicationOptions): Application
       pixiApp.destroy(true);
     }
 
-    // check if Application has init method
-    if (!Application.prototype.init) {
-      pixiApp = new Application({ ...applicationOptions, view: canvas });
-      appReady = Promise.resolve();
-    } else {
-      pixiApp = new Application();
-      appReady = pixiApp.init({ ...applicationOptions, canvas });
-    }
+    pixiApp = new Application({ ...applicationOptions, view: canvas });
+    appReady = Promise.resolve();
 
     lastApplicationOptions = applicationOptions;
   }
@@ -170,7 +164,9 @@ function addStory({
 
   if (storyObject.update) {
     updateRef = updater();
-    Ticker.shared.add(storyObject.update, updateRef);
+    app.ticker.add(() => {
+      storyObject.update && storyObject.update(app.ticker);
+    }, updateRef);
   }
 
   return storyResizeHandler;
@@ -186,7 +182,9 @@ function removeStory({
   storyResizeHandler: EventHandler;
 }) {
   if (storyObject.update) {
-    Ticker.shared.remove(storyObject.update, updateRef);
+    Ticker.shared.remove(() => {
+      storyObject.update && storyObject.update(app.ticker);
+    }, updateRef);
   }
 
   app.stage.removeChild(storyObject.view);

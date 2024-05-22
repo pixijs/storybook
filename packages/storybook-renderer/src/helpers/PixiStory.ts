@@ -1,4 +1,4 @@
-import { Container, Ticker } from 'pixi.js';
+import { Container, Ticker } from 'pixi.js-legacy';
 import { StoryFn } from '../types/public-types';
 
 export class PixiStory<Args> {
