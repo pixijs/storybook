@@ -1,6 +1,6 @@
 {
   "name": "@pixi/storybook-preset-vite",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "description": "Storybook for PixiJS: View PixiJS Components in isolation with Hot Reloading.",
   "homepage": "https://github.com/pixijs/storybook/tree/main/packages/storybook-preset-vite",
   "repository": {
@@ -40,14 +40,14 @@
     "build": "../../scripts/prepare/bundle.ts"
   },
   "dependencies": {
-    "@storybook/builder-vite": "^7.0.0",
-    "@storybook/types": "^7.0.0",
+    "@storybook/builder-vite": "^8.0.0",
+    "@storybook/types": "^8.0.0",
     "@types/node": "^16.0.0",
     "react": "16.14.0",
     "react-dom": "16.14.0"
   },
   "devDependencies": {
-    "typescript": "~4.6.3"
+    "typescript": "~5.3.3"
   },
   "engines": {
     "node": ">=10.13.0"
