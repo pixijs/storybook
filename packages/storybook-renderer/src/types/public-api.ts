@@ -11,11 +11,12 @@ interface ClientApi extends Addon_ClientStoryApi<PixiFramework['storyResult']> {
   configure(loader: Addon_Loadable, module: NodeModule): void;
   forceReRender(): void;
   raw: () => any; // todo add type
+  storiesOf(kind: string, m: NodeModule): any;
 }
 
-const api = start<any>(renderToDOM); // todo add type
+const api = start<PixiFramework>(renderToDOM);
 
-export const storiesOf: ClientApi['storiesOf'] = (kind, m) => {
+export const storiesOf: ClientApi['storiesOf'] = (kind: string, m: NodeModule) => {
   return (api.clientApi.storiesOf(kind, m) as ReturnType<ClientApi['storiesOf']>).addParameters({
     framework: FRAMEWORK,
   });

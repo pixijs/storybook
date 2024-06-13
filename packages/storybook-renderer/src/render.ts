@@ -2,7 +2,7 @@ import equals from 'deep-equal';
 import type { ApplicationOptions } from 'pixi.js';
 import { Application, Ticker } from 'pixi.js';
 
-import type { RenderContext } from '@storybook/types';
+import type { RenderContext, RenderToCanvas } from '@storybook/types';
 import { dedent } from 'ts-dedent';
 import type {
   ApplicationResizeFunction,
@@ -196,10 +196,12 @@ function removeStory({
   storyObject.destroy?.();
 }
 
-export function renderToDOM(
+export const renderToDOM: RenderToCanvas<PixiFramework> = (
   { storyContext, unboundStoryFn, kind, id, name, showMain, showError, forceRemount }: RenderContext<PixiFramework>,
-  domElement: HTMLCanvasElement,
-) {
+  domElement: unknown,
+) => {
+  const canvasElement = domElement as HTMLCanvasElement;
+
   const { parameters } = storyContext;
   const { pixi: pixiParameters } = parameters;
   const { applicationOptions, resizeFn = resizeDefault } = pixiParameters;
@@ -213,10 +215,9 @@ export function renderToDOM(
   // Expose app to a global variable for debugging using `pixi-inspector` (https://github.com/bfanger/pixi-inspector)
   (globalThis as any).__PIXI_APP__ = app;
 
-  if (domElement.firstChild !== canvas || forceRemount) {
-    // eslint-disable-next-line no-param-reassign
-    domElement.innerHTML = '';
-    domElement.appendChild(canvas);
+  if (canvasElement.firstChild !== canvas || forceRemount) {
+    canvasElement.innerHTML = '';
+    canvasElement.appendChild(canvas);
   }
 
   if (storyState) {
