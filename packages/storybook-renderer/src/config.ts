@@ -1,2 +1,2 @@
 export const parameters = { framework: 'pixi' as const };
-export { renderToDOM } from './render';
+export { renderToDOM, renderToCanvas } from './render';

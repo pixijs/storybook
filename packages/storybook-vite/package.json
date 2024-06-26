@@ -44,7 +44,7 @@
     "@pixi/storybook-renderer": "^0.1.0",
     "@storybook/builder-vite": "^8.0.0",
     "@storybook/core-common": "^8.0.0",
-    "@types/node": "^16.0.0",
+    "@types/node": "^18.0.0",
     "@types/offscreencanvas": "^2019.7.0",
     "global": "^4.4.0",
     "react": "16.14.0",
@@ -54,7 +54,7 @@
     "typescript": "~5.3.3"
   },
   "engines": {
-    "node": ">=10.13.0"
+    "node": ">=18"
   },
   "publishConfig": {
     "access": "public"

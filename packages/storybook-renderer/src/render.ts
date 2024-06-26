@@ -269,3 +269,5 @@ export const renderToDOM: RenderToCanvas<PixiFramework> = (
     removeStory({ app, storyObject, storyResizeHandler });
   };
 }
+
+export const renderToCanvas: RenderToCanvas<PixiFramework> = renderToDOM;

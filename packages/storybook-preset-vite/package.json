@@ -42,7 +42,7 @@
   "dependencies": {
     "@storybook/builder-vite": "^8.0.0",
     "@storybook/types": "^8.0.0",
-    "@types/node": "^16.0.0",
+    "@types/node": "^18.0.0",
     "react": "16.14.0",
     "react-dom": "16.14.0"
   },
@@ -50,7 +50,7 @@
     "typescript": "~5.3.3"
   },
   "engines": {
-    "node": ">=10.13.0"
+    "node": ">=18"
   },
   "publishConfig": {
     "access": "public"

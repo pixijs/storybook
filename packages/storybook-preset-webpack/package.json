@@ -40,8 +40,8 @@
     "build": "../../scripts/prepare/bundle.ts"
   },
   "dependencies": {
-    "@storybook/core-webpack": "^7.0.0",
-    "@types/node": "^16.0.0",
+    "@storybook/core-webpack": "^8.0.0",
+    "@types/node": "^18.0.0",
     "webpack": "5"
   },
   "devDependencies": {
@@ -51,7 +51,7 @@
     "@babel/core": "*"
   },
   "engines": {
-    "node": ">=10.13.0"
+    "node": ">=18"
   },
   "publishConfig": {
     "access": "public"
