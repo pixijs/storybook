@@ -17,7 +17,9 @@
     "lib": ["dom", "esnext"],
     "paths": {
       "@pixi/storybook-renderer": ["packages/storybook-renderer/src"],
+      "@pixi/storybook-preset-vite": ["packages/storybook-preset-vite/src"],
       "@pixi/storybook-preset-webpack": ["packages/storybook-preset-webpack/src"],
+      "@pixi/storybook-vite": ["packages/storybook-vite/src"],
       "@pixi/storybook-webpack5": ["packages/storybook-webpack5/src"],
     }
   },

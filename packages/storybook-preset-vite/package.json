@@ -1,12 +1,12 @@
 {
-  "name": "@pixi/storybook-webpack5",
+  "name": "@pixi/storybook-preset-vite",
   "version": "0.1.0",
-  "description": "Storybook for PixiJS: View Pixi Components in isolation with Hot Reloading.",
-  "homepage": "https://github.com/pixijs/storybook/tree/main/packages/storybook-webpack5",
+  "description": "Storybook for PixiJS: View PixiJS Components in isolation with Hot Reloading.",
+  "homepage": "https://github.com/pixijs/storybook/tree/main/packages/storybook-preset-vite",
   "repository": {
     "type": "git",
     "url": "https://github.com/pixijs/storybook.git",
-    "directory": "packages/storybook-webpack5"
+    "directory": "packages/storybook-preset-vite"
   },
   "license": "MIT",
   "exports": {
@@ -16,9 +16,9 @@
       "types": "./dist/index.d.ts"
     },
     "./preset": {
-      "require": "./dist/preset.js",
-      "import": "./dist/preset.mjs",
-      "types": "./dist/preset.d.ts"
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
     },
     "./package.json": {
       "require": "./package.json",
@@ -40,20 +40,14 @@
     "build": "../../scripts/prepare/bundle.ts"
   },
   "dependencies": {
-    "@pixi/storybook-preset-webpack": "^0.1.0",
-    "@pixi/storybook-renderer": "^0.1.0",
-    "@storybook/builder-webpack5": "^8.0.0",
-    "@storybook/core-common": "^8.0.0",
-    "@storybook/addon-webpack5-compiler-babel": "^3.0.0",
+    "@storybook/builder-vite": "^8.0.0",
+    "@storybook/types": "^8.0.0",
     "@types/node": "^18.0.0",
-    "@types/offscreencanvas": "^2019.7.3",
-    "global": "^4.4.0"
+    "react": "16.14.0",
+    "react-dom": "16.14.0"
   },
   "devDependencies": {
     "typescript": "~5.3.3"
-  },
-  "peerDependencies": {
-    "@babel/core": "*"
   },
   "engines": {
     "node": ">=18"
@@ -63,8 +57,7 @@
   },
   "bundler": {
     "entries": [
-      "./src/index.ts",
-      "./src/preset.ts"
+      "./src/index.ts"
     ],
     "platform": "node"
   }
