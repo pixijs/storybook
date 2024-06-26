@@ -1,5 +1,5 @@
 import path from "path";
-import type { PresetProperty } from "@storybook/types";
+import type { PresetProperty, PresetPropertyFn } from "@storybook/types";
 import type { StorybookConfig } from "./types";
 
 export const addons: PresetProperty<"addons", StorybookConfig> = [
@@ -11,7 +11,7 @@ export const addons: PresetProperty<"addons", StorybookConfig> = [
   ),
 ];
 
-export const core: PresetProperty<"core", StorybookConfig> = async (
+export const core: PresetPropertyFn<"core", StorybookConfig> = async (
   config,
   options
 ) => {

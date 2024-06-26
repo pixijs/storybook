@@ -30,7 +30,7 @@ const resizeState = {
 
 function updater() {
   let first = false;
-  return (ticker: Ticker) => {
+  return function (ticker: Ticker){
     if (first) {
       resizeApplication({
         containerWidth: window.innerWidth,
@@ -170,7 +170,7 @@ function addStory({
 
   if (storyObject.update) {
     updateRef = updater();
-    Ticker.shared.add(storyObject.update, updateRef);
+    Ticker.shared.add(updateRef);
   }
 
   return storyResizeHandler;
@@ -186,7 +186,7 @@ function removeStory({
   storyResizeHandler: EventHandler;
 }) {
   if (storyObject.update) {
-    Ticker.shared.remove(storyObject.update, updateRef);
+    Ticker.shared.remove(updateRef);
   }
 
   app.stage.removeChild(storyObject.view);
