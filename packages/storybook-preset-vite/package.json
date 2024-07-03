@@ -1,6 +1,6 @@
 {
   "name": "@pixi/storybook-preset-vite",
-  "version": "1.0.0-alpha.0",
+  "version": "1.0.0",
   "description": "Storybook for PixiJS: View PixiJS Components in isolation with Hot Reloading.",
   "homepage": "https://github.com/pixijs/storybook/tree/main/packages/storybook-preset-vite",
   "repository": {
