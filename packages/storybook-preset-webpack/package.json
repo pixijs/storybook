@@ -1,6 +1,6 @@
 {
   "name": "@pixi/storybook-preset-webpack",
-  "version": "0.1.0",
+  "version": "1.0.0-alpha.0",
   "description": "Storybook for PixiJS: View PixiJS Components in isolation with Hot Reloading.",
   "homepage": "https://github.com/pixijs/storybook/tree/main/packages/storybook-preset-webpack",
   "repository": {
@@ -40,8 +40,8 @@
     "build": "../../scripts/prepare/bundle.ts"
   },
   "dependencies": {
-    "@storybook/core-webpack": "^7.0.0",
-    "@types/node": "^16.0.0",
+    "@storybook/core-webpack": "^8.0.0",
+    "@types/node": "^18.0.0",
     "webpack": "5"
   },
   "devDependencies": {
@@ -51,7 +51,7 @@
     "@babel/core": "*"
   },
   "engines": {
-    "node": ">=10.13.0"
+    "node": ">=18"
   },
   "publishConfig": {
     "access": "public"

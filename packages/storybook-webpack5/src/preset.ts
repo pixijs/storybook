@@ -1,5 +1,5 @@
 import path from 'path';
-import type { PresetProperty } from '@storybook/types';
+import type { PresetProperty, PresetPropertyFn } from '@storybook/types';
 import type { StorybookConfig } from './types';
 
 export const addons: PresetProperty<'addons', StorybookConfig> = [
@@ -7,7 +7,7 @@ export const addons: PresetProperty<'addons', StorybookConfig> = [
   path.dirname(require.resolve(path.join('@pixi/storybook-renderer', 'package.json'))),
 ];
 
-export const core: PresetProperty<'core', StorybookConfig> = async (config, options) => {
+export const core: PresetPropertyFn<'core', StorybookConfig> = async (config, options) => {
   const framework = await options.presets.apply<StorybookConfig['framework']>('framework');
 
   return {

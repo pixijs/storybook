@@ -17,20 +17,27 @@ to initialize with the html framework and manually edit the configuration:
 
 ```sh
 cd my-app
-npx storybook@"~7.0.0-beta" init -t html
+npx storybook@"~8.0.0" init -t html
 ```
 
-Remove HTML framework/renderer and install PixiJS framework/renderer:
+Remove HTML framework/renderer and install PixiJS framework/renderer based on your bunder:
 
 ```sh
 npm remove @storybook/html @storybook/html-webpack5 --save-dev
+```
+
+```
 npm install @pixi/storybook-renderer @pixi/storybook-webpack5 --save-dev
+```
+_or_
+```
+npm install @pixi/storybook-renderer @pixi/storybook-vite --save-dev
 ```
 
 Replace `.storybook/main.js` with the below, setting up the correct paths as necessary.
 
 ```javascript
-module.exports = {
+const config = {
   // use glob matching, eg: ../src/stories/**/*.stories.@(ts|tsx|js|jsx|mdx)
   stories: ['RELATIVE_PATH_TO_STORIES'],
   staticDirs: ['RELATIVE_PATH_TO_ASSETS'],
@@ -51,35 +58,41 @@ module.exports = {
     buildStoriesJson: true,
     breakingChangesV7: true,
   },
-  framework: '@pixi/storybook-webpack5',
+  framework: '@pixi/storybook-webpack5', // or '@pixi/storybook-vite'
 };
+
+export default config;
 ```
 
 Replace `.storybook/preview.js` with:
 
 ```javascript
-export const parameters = { 
-  layout: 'fullscreen', 
-  pixi: {
-    // these are passed as options to `PIXI.Application` when instantiated by the 
-    // renderer
-    applicationOptions: {
-      backgroundColor: 0x1099bb,
-      resolution: 1,
-    },
-    // optional, if you want to provide custom resize logic, pass a function here,
-    // if nothing is provided, the default resize function is used, which looks like
-    // this, where w and h will be the width and height of the storybook canvas.
-    resizeFn: (w, h) => {
-      return {
-        rendererWidth: w,
-        rendererHeight: h,
-        canvasWidth: w,
-        canvasHeight: h,
-      };
+const preview = {
+  parameters: { 
+    layout: 'fullscreen', 
+    pixi: {
+      // these are passed as options to `PIXI.Application` when instantiated by the 
+      // renderer
+      applicationOptions: {
+        backgroundColor: 0x1099bb,
+        resolution: 1,
+      },
+      // optional, if you want to provide custom resize logic, pass a function here,
+      // if nothing is provided, the default resize function is used, which looks like
+      // this, where w and h will be the width and height of the storybook canvas.
+      resizeFn: (w, h) => {
+        return {
+          rendererWidth: w,
+          rendererHeight: h,
+          canvasWidth: w,
+          canvasHeight: h,
+        };
+      },
     },
   },
 };
+
+export default preview;
 ```
 
 Depending on where you want to keep your story source, either delete `src/stories` folder
