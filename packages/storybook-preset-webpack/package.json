@@ -37,7 +37,7 @@
   ],
   "scripts": {
     "check": "tsc --noEmit",
-    "build": "../../scripts/prepare/bundle.ts"
+    "build": "ts-node ../../scripts/prepare/bundle.ts --optimized"
   },
   "dependencies": {
     "@storybook/core-webpack": "^8.0.0",
