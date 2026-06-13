@@ -37,7 +37,7 @@
   ],
   "scripts": {
     "check": "tsc --noEmit",
-    "build": "../../scripts/prepare/bundle.ts"
+    "build": "ts-node ../../scripts/prepare/bundle.ts --optimized"
   },
   "dependencies": {
     "@pixi/storybook-preset-vite": "^1.0.0",

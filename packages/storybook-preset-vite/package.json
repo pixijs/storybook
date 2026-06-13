@@ -37,7 +37,7 @@
   ],
   "scripts": {
     "check": "tsc --noEmit",
-    "build": "../../scripts/prepare/bundle.ts"
+    "build": "ts-node ../../scripts/prepare/bundle.ts --optimized"
   },
   "dependencies": {
     "@storybook/builder-vite": "^8.0.0",
