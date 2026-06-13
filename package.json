@@ -24,5 +24,8 @@
     "slash": "^3.0.0",
     "execa": "^5.0.0",
     "chalk": "^4.1.0"
+  },
+  "bugs": {
+    "url": "https://github.com/pixijs/storybook/issues"
   }
 }
